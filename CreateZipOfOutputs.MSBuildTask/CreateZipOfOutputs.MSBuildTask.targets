@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(ProjectDir)CreateZipOfOutputs.props" Condition="Exists('$(ProjectDir)CreateZipOfOutputs.props')" />
+  <PropertyGroup>
+    <AssemblyInfoCSPath Condition="'$(AssemblyInfoCSPath)' == ''">$(ProjectDir)Properties\AssemblyInfo.cs</AssemblyInfoCSPath>
+    <AssemblyInfoCSContent Condition="Exists('$(AssemblyInfoCSPath)')">$([System.IO.File]::ReadAllText("$(AssemblyInfoCSPath)"))</AssemblyInfoCSContent>
+    <AssemblyInfoCSVersionTextRegexPattern Condition="'$(AssemblyInfoCSVersionTextRegexPattern)' == ''">(?m)^[ \t]*\[assembly:[ \t]AssemblyVersion\("([\d\.]+)[\.\*]*"[^)]*\)[^\]]*\][ \t\r\n]*$</AssemblyInfoCSVersionTextRegexPattern>
+    <AssemblyInfoCSVersionText Condition="'$(AssemblyInfoCSVersionText)' == '' AND '$(AssemblyInfoCSContent)' != ''">$([System.Text.RegularExpressions.Regex]::Match($(AssemblyInfoCSContent), $(AssemblyInfoCSVersionTextRegexPattern)).Groups[1].Value.TrimEnd('.'))</AssemblyInfoCSVersionText>
+    <ZipOfOutputsPath Condition="'$(ZipOfOutputsPath)' == '' AND '$(AssemblyInfoCSVersionText)' != ''" >$(ProjectDir)$(OutputPath)$(TargetName) - v.$(AssemblyInfoCSVersionText).zip</ZipOfOutputsPath>
+    <ZipOfOutputsPath Condition="'$(ZipOfOutputsPath)' == ''">$(ProjectDir)$(OutputPath)$(TargetName).zip</ZipOfOutputsPath>
+    <DisableCreateZipOfOutputs Condition="'$(DisableCreateZipOfOutputs)' == '' AND '$(Configuration)' != 'Release'">true</DisableCreateZipOfOutputs>
+    <DisableCreateZipOfOutputs Condition="'$(DisableCreateZipOfOutputs)' == ''">false</DisableCreateZipOfOutputs>
+    <ZipOfOutputsExcludeFilesPattern Condition="'$(ZipOfOutputsExcludeFilesPattern)' == ''">**\*.nupkg;**\*.iso;**\*.zip;**\*.pdb;**\*.xml;**\*.application;**\*.vshost.exe.manifest;**\*.vshost.exe;**\*.vshost.exe.config</ZipOfOutputsExcludeFilesPattern>
+  </PropertyGroup>
+  <Target Name="CreateZipOfOutputs" AfterTargets="AfterBuild" Condition="'$(DisableCreateZipOfOutputs)' == 'false'">
+    <ItemGroup>
+      <ZipOfOutputsTargetFiles Include="$(OutputPath)**\*.*" Exclude="$(ZipOfOutputsExcludeFilesPattern)" />
+    </ItemGroup>
+    <Delete Files="$(ZipOfOutputsPath)" />
+    <MSBuild.ExtensionPack.Compression.Zip
+        TaskAction="Create"
+        ZipFileName="$(ZipOfOutputsPath)"
+        RemoveRoot="$(OutputPath)"
+        CompressFiles="@(ZipOfOutputsTargetFiles)" />
+  </Target>
+  <Target Name="CleanZipOfOutputs" AfterTargets="AfterClean">
+    <Delete Files="$(ZipOfOutputsPath)" />
+  </Target>
+</Project>

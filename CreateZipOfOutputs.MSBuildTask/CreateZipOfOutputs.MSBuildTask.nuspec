@@ -1,0 +1,32 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <copyright>$copyright$</copyright>
+    <projectUrl>https://github.com/jsakamoto/CreateZipOfOutputs.MSBuildTask</projectUrl>
+    <licenseUrl>https://github.com/jsakamoto/CreateZipOfOutputs.MSBuildTask/blob/master/LICENSE</licenseUrl>
+    <!--
+    <iconUrl/>
+    -->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <summary>MSBuild task for creating zip archive file (.zip) that contains output files</summary>
+    <description>
+      Just by installing this package, a zip archive file (.zip) that contains the output files will be created in the output folder when building the project (at default configuration, it works only "Release" build).
+      The zip arhive file name contains assembly version text.
+    </description>
+    <releaseNotes>
+      <![CDATA[
+      v.1.0.0
+      - 1st Release
+    ]]>
+    </releaseNotes>
+    <tags>msbuild zip</tags>
+  </metadata>
+  <files>
+    <file src="CreateZipOfOutputs.MSBuildTask.targets" target="build" />
+  </files>
+</package>
