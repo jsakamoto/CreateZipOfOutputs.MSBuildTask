@@ -13,7 +13,7 @@
     <iconUrl/>
     -->
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <summary>MSBuild task for creating zip archive file (.zip) that contains output files</summary>
+    <summary>Just by installing this package, you will get zip archive file (.zip) that contains output files when the project built.</summary>
     <description>
       Just by installing this package, a zip archive file (.zip) that contains the output files will be created in the output folder when building the project (at default configuration, it works only "Release" build).
       The zip arhive file name contains assembly version text.
