@@ -69,7 +69,9 @@ Add "CreateZipOfOutputs.props" file to the project like bellow.
     <ZipOfOutputsPath>$(ProjectDir)$(OutputPath)$(TargetName) - v.$(AssemblyInfoCSVersionText).zip</ZipOfOutputsPath>
     <DisableCreateZipOfOutputs Condition="'$(Configuration)' != 'Release'">true</DisableCreateZipOfOutputs>
     <ZipOfOutputsExcludeFilesPattern >**\*.nupkg;**\*.iso;**\*.zip;**\*.pdb;**\*.xml;**\*.application;**\*.vshost.exe.manifest;**\*.vshost.exe;**\*.vshost.exe.config</ZipOfOutputsExcludeFilesPattern>
+    <ZipOfRemoveRoot>$(OutputPath)</ZipOfRemoveRoot>
   </PropertyGroup>
+</Project>
 ```
 
 "CreateZipOfOutputs" Build task read "CreateZipOfOutputs.props" file in the project folder if it exists, and use those properties high priority.

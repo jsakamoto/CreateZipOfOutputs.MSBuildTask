@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("J.Sakamoto")]
 [assembly: AssemblyProduct("CreateZipOfOutputs.MSBuildTask")]
-[assembly: AssemblyCopyright("Copyright © J.Sakamoto 2016 Mozilla Public License 2.0")]
+[assembly: AssemblyCopyright("Copyright © J.Sakamoto 2016-2018 Mozilla Public License 2.0")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,4 +32,4 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.1.0.0")]
